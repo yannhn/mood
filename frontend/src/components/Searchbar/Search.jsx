@@ -1,21 +1,25 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 const Search = () => {
   const [search, setSearch] = useState("");
 
+  async function fetchData() {
+    const response = await fetch(
+      `https://api.pexels.com/v1/search?query=${search}`,
+      {
+        headers: {
+          Authorization: import.meta.env.VITE_PEXELS_AUTH_KEY,
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    fetchData();
   };
-  useEffect(() => {
-    fetch("https://api.pexels.com/v1/search?query=people", {
-      headers: {
-        Authorization: import.meta.env.VITE_PEXELS_AUTH_KEY,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
-  }, []);
 
   return (
     <section className="hero min-h-min">
@@ -45,9 +49,9 @@ const Search = () => {
                   stroke="currentColor"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                   />
                 </svg>
@@ -56,7 +60,6 @@ const Search = () => {
           </form>
         </div>
       </div>
-      <p>{search}</p>
     </section>
   );
 };
