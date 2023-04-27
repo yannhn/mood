@@ -1,22 +1,45 @@
+import { useEffect, useState } from "react";
 const Search = () => {
+  const [search, setSearch] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+  useEffect(() => {
+    fetch("https://api.pexels.com/v1/search?query=people", {
+      headers: {
+        Authorization: "YOUR_API_KEY",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }, []);
+
   return (
     <section className="hero min-h-min">
       {/* <div className="hero-overlay bg-opacity-60"></div> */}
       <div className="hero-content text-center">
         <div className="max-w-md">
           <h1 className="mb-5 text-5xl font-bold">Find your next idea</h1>
-          <form className="flex-col justify-center items-center">
+          <form
+            className="flex-col justify-center items-center"
+            onSubmit={handleSubmit}
+          >
             <label htmlFor="searchBar"></label>
             <div className="input-group flex justify-center">
               <input
                 type="text"
                 className="input input-bordered"
                 placeholder="enter search..."
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
               />
-              <button class="btn btn-square btn-primary">
+              <button className="btn btn-square btn-primary">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6"
+                  className="h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -33,6 +56,7 @@ const Search = () => {
           </form>
         </div>
       </div>
+      <p>{search}</p>
     </section>
   );
 };
