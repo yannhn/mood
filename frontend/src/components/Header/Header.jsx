@@ -5,10 +5,14 @@ const Header = () => {
       <nav>
         <ul className="flex gap-6">
           <li>
-            <a href="">Boards</a>
+            <a href="" className="btn btn-outline">
+              Boards
+            </a>
           </li>
           <li>
-            <a href="">Login/Profile</a>
+            <a href="" className="btn btn-outline">
+              Login/Profile
+            </a>
           </li>
         </ul>
       </nav>
