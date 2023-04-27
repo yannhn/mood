@@ -8,7 +8,7 @@ const Search = () => {
   useEffect(() => {
     fetch("https://api.pexels.com/v1/search?query=people", {
       headers: {
-        Authorization: "YOUR_API_KEY",
+        Authorization: import.meta.env.VITE_PEXELS_AUTH_KEY,
       },
     })
       .then((res) => res.json())
