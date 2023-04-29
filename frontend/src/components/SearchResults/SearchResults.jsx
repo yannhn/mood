@@ -1,18 +1,27 @@
 const SearchResults = ({ searchResults }) => {
   return (
-    <div className="p-8">
-      <div className="grid grid-cols-4 gap-8">
+    <div className="p-8 ">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-4 ">
         {searchResults.map((searchResult) => {
           return (
-            <div key={searchResult.id}>
+            <div className="card  shadow-xl" key={searchResult.id}>
               <img src={searchResult.src.tiny} />
-              <span>
-                This <a href={searchResult.url}>Photo</a> was taken by
-                <a href={searchResult.photographer_url}>
-                  {searchResult.photographer}
-                </a>
-                on Pexels.
-              </span>
+              <div className="card-body">
+                <span>
+                  This{" "}
+                  <a className="link" href={searchResult.url}>
+                    Photo
+                  </a>{" "}
+                  was taken by{" "}
+                  <a className="link" href={searchResult.photographer_url}>
+                    {searchResult.photographer}
+                  </a>{" "}
+                  on Pexels.
+                </span>
+              </div>
+              <div class="card-actions justify-center mb-4">
+                <button class="btn btn-sm btn-outline ">Add to board</button>
+              </div>
             </div>
           );
         })}
