@@ -1,7 +1,10 @@
 import { useState } from "react";
+import SearchResults from "../SearchResults/SearchResults";
+
 const Search = () => {
   const [search, setSearch] = useState("");
   const [error, setError] = useState(null);
+  const [searchResults, setSearchResults] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -19,6 +22,7 @@ const Search = () => {
       }
       const data = await response.json();
       console.log(data);
+      setSearchResults(data.photos);
       setError(null);
     } catch (err) {
       setError(err.message);
@@ -27,9 +31,10 @@ const Search = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     fetchData();
   };
+
+  console.log("RES:", searchResults);
 
   return (
     <div>
@@ -73,6 +78,8 @@ const Search = () => {
         </div>
       </section>
       {error && <div>{error}</div>}
+
+      <SearchResults searchResults={searchResults} />
     </div>
   );
 };
