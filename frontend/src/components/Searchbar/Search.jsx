@@ -73,10 +73,69 @@ const Search = () => {
                   </svg>
                 </button>
               </div>
+              <div className="flex justify-center gap-4 mt-4">
+                <label
+                  className="btn btn-outline btn-primary btn-sm"
+                  htmlFor="nature"
+                >
+                  Nature
+                </label>
+                <input
+                  type="checkbox"
+                  id="nature"
+                  value="nature"
+                  data-title="nature"
+                  className="hidden"
+                  onChange={(event) => setSearch(event.target.value)}
+                />
+                <label
+                  className="btn btn-outline btn-primary btn-sm"
+                  htmlFor="car"
+                >
+                  Car
+                </label>
+                <input
+                  type="checkbox"
+                  id="car"
+                  value="car"
+                  data-title="car"
+                  className="hidden"
+                  onChange={(event) => setSearch(event.target.value)}
+                />
+                <label
+                  className="btn btn-outline btn-primary btn-sm"
+                  htmlFor="people"
+                >
+                  People
+                </label>
+                <input
+                  type="checkbox"
+                  id="people"
+                  value="people"
+                  data-title="people"
+                  className="hidden"
+                  onChange={(event) => setSearch(event.target.value)}
+                />
+                <label
+                  className="btn btn-outline btn-primary btn-sm"
+                  htmlFor="dogs"
+                >
+                  Dogs
+                </label>
+                <input
+                  type="checkbox"
+                  id="dogs"
+                  value="dogs"
+                  data-title="dogs"
+                  className="hidden"
+                  onChange={(event) => setSearch(event.target.value)}
+                />
+              </div>
             </form>
           </div>
         </div>
       </section>
+
       {error && <div>{error}</div>}
 
       <SearchResults searchResults={searchResults} />

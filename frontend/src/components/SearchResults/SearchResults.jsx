@@ -19,8 +19,10 @@ const SearchResults = ({ searchResults }) => {
                   on Pexels.
                 </span>
               </div>
-              <div class="card-actions justify-center mb-4">
-                <button class="btn btn-sm btn-outline ">Add to board</button>
+              <div className="card-actions justify-center mb-4">
+                <button className="btn btn-sm btn-outline ">
+                  Add to board
+                </button>
               </div>
             </div>
           );
