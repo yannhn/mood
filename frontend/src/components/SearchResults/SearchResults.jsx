@@ -20,7 +20,7 @@ const SearchResults = ({ searchResults }) => {
                 </span>
               </div>
               <div class="card-actions justify-center mb-4">
-                <button class="btn btn-sm btn-outline ">Add to board</button>
+                <button class="btn btn-sm btn-outline">Add to board</button>
               </div>
             </div>
           );
