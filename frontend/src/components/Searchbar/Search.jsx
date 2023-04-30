@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchResults from "../SearchResults/SearchResults";
 
 const Search = () => {
   const [search, setSearch] = useState("");
   const [error, setError] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
+  const [backgroundImage, setBackgroundImage] = useState("");
+  const [backgroundImageInfo, setBackgroundImageInfo] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -21,11 +23,38 @@ const Search = () => {
       }
       const data = await response.json();
       setSearchResults(data.photos);
+
       setError(null);
     } catch (err) {
       setError(err.message);
     }
   };
+
+  useEffect(() => {
+    const array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const randomElement = array[Math.floor(Math.random() * array.length)];
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`https://api.pexels.com/v1/curated`, {
+          headers: {
+            Authorization: import.meta.env.VITE_PEXELS_AUTH_KEY,
+          },
+        });
+        if (!response.ok) {
+          throw Error("could not fetch the data!");
+        }
+        const data = await response.json();
+
+        setBackgroundImage(data.photos[randomElement].src.landscape);
+        setBackgroundImageInfo(data.photos[randomElement]);
+      } catch (err) {
+        console.error(err.message);
+        // setBackgroundImage("");
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -34,11 +63,29 @@ const Search = () => {
 
   return (
     <div>
-      <section className="hero min-h-min">
-        {/* <div className="hero-overlay bg-opacity-60"></div> */}
+      <section
+        className="relative hero h-80 md:min-h-screen"
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+        }}
+      >
+        <span className="absolute bottom-0 right-0 text-right text-xs">
+          This{" "}
+          <a className="link" href={backgroundImageInfo.url}>
+            Photo
+          </a>{" "}
+          was taken by{" "}
+          <a className="link" href={backgroundImageInfo.photographer_url}>
+            {backgroundImageInfo.photographer}
+          </a>{" "}
+          on Pexels.
+        </span>
+        <div className="hero-overlay bg-opacity-80"></div>
         <div className="hero-content text-center">
           <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">Find your next idea</h1>
+            <h1 className="mb-5 text-5xl font-bold text-white	">
+              Find your next idea
+            </h1>
             <form
               className="flex-col justify-center items-center"
               onSubmit={handleSubmit}
@@ -70,10 +117,7 @@ const Search = () => {
                 </button>
               </div>
               <div className="flex justify-center gap-4 mt-4">
-                <label
-                  className="btn btn-outline btn-primary btn-sm"
-                  htmlFor="nature"
-                >
+                <label className="btn btn-accent btn-sm" htmlFor="nature">
                   Nature
                 </label>
                 <input
@@ -84,10 +128,7 @@ const Search = () => {
                   className="hidden"
                   onChange={(event) => setSearch(event.target.value)}
                 />
-                <label
-                  className="btn btn-outline btn-primary btn-sm"
-                  htmlFor="car"
-                >
+                <label className="btn btn-accent btn-sm" htmlFor="car">
                   Car
                 </label>
                 <input
@@ -98,10 +139,7 @@ const Search = () => {
                   className="hidden"
                   onChange={(event) => setSearch(event.target.value)}
                 />
-                <label
-                  className="btn btn-outline btn-primary btn-sm"
-                  htmlFor="people"
-                >
+                <label className="btn btn-accent btn-sm" htmlFor="people">
                   People
                 </label>
                 <input
@@ -112,10 +150,7 @@ const Search = () => {
                   className="hidden"
                   onChange={(event) => setSearch(event.target.value)}
                 />
-                <label
-                  className="btn btn-outline btn-primary btn-sm"
-                  htmlFor="dogs"
-                >
+                <label className="btn btn-accent btn-sm" htmlFor="dogs">
                   Dogs
                 </label>
                 <input
