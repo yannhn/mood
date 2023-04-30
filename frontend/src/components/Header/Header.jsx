@@ -1,18 +1,25 @@
+import { Outlet, Link } from "react-router-dom";
+
 const Header = () => {
   return (
     <header className="flex justify-between items-center p-4 bg-white border-b-4 ">
       <h1 className="text-3xl font bold underline">mood</h1>
       <nav>
-        <ul className="flex gap-6">
+        <ul className="flex gap-2">
           <li>
-            <a href="" className="btn btn-outline">
-              Boards
-            </a>
+            <Link to={"/"} className="btn btn-sm btn-outline">
+              home
+            </Link>
           </li>
           <li>
-            <a href="" className="btn btn-outline">
+            <Link to={"/boards"} className="btn btn-sm btn-outline">
+              Boards
+            </Link>
+          </li>
+          <li>
+            <Link to={"/profile"} className="btn btn-sm btn-outline">
               Login/Profile
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
