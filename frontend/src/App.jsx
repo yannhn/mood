@@ -1,27 +1,36 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import Header from "./components/Header/Header";
-import Search from "./components/Searchbar/Search";
+import Index from "./routes/Index";
 import Boards from "./routes/Boards";
 import Profile from "./routes/Profile";
+import Layout from "./components/Layout/Layout";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <>
-        <Header />
-        <Search />
+        <Layout>
+          <Index />
+        </Layout>
       </>
     ),
   },
   {
     path: "boards",
-    element: <Boards />,
+    element: (
+      <Layout>
+        <Boards />
+      </Layout>
+    ),
   },
   {
     path: "profile",
-    element: <Profile />,
+    element: (
+      <Layout>
+        <Profile />
+      </Layout>
+    ),
   },
 ]);
 

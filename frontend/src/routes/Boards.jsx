@@ -1,11 +1,7 @@
 import Header from "../components/Header/Header";
 
 const Boards = () => {
-  return (
-    <>
-      <Header />
-    </>
-  );
+  return <></>;
 };
 
 export default Boards;
