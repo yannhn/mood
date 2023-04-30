@@ -16,12 +16,10 @@ const Search = () => {
           },
         }
       );
-      console.log(response);
       if (!response.ok) {
         throw Error("could not fetch the data!");
       }
       const data = await response.json();
-      console.log(data);
       setSearchResults(data.photos);
       setError(null);
     } catch (err) {
@@ -33,8 +31,6 @@ const Search = () => {
     event.preventDefault();
     fetchData();
   };
-
-  console.log("RES:", searchResults);
 
   return (
     <div>
