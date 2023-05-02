@@ -7,17 +7,17 @@ const Header = () => {
       <nav>
         <ul className="flex gap-2">
           <li>
-            <Link to={"/"} className="btn btn-sm btn-outline">
+            <Link to={"/"} className="btn btn-xs btn-outline">
               home
             </Link>
           </li>
           <li>
-            <Link to={"/boards"} className="btn btn-sm btn-outline">
+            <Link to={"/boards"} className="btn btn-xs btn-outline">
               Boards
             </Link>
           </li>
           <li>
-            <Link to={"/profile"} className="btn btn-sm btn-outline">
+            <Link to={"/profile"} className="btn btn-xs btn-outline">
               Login/Profile
             </Link>
           </li>
