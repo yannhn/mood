@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SearchResults from "../SearchResults/SearchResults";
+import ResultContainer from "../ResultContainer/ResultContainer";
 
 const Search = () => {
   const [search, setSearch] = useState("");
@@ -169,7 +169,7 @@ const Search = () => {
 
       {error && <div>{error}</div>}
 
-      <SearchResults searchResults={searchResults} />
+      <ResultContainer searchResults={searchResults} />
     </div>
   );
 };
