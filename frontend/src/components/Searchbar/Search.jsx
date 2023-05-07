@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ResultContainer from "../ResultContainer/ResultContainer";
 
-const Search = () => {
+const Search = ({ boards, setBoards }) => {
   const [search, setSearch] = useState("");
   const [error, setError] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
@@ -168,7 +168,11 @@ const Search = () => {
 
       {error && <div>{error}</div>}
 
-      <ResultContainer searchResults={searchResults} />
+      <ResultContainer
+        searchResults={searchResults}
+        boards={boards}
+        setBoards={setBoards}
+      />
     </div>
   );
 };

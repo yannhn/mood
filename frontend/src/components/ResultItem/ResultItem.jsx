@@ -1,13 +1,11 @@
 import { nanoid } from "nanoid";
 import { useState } from "react";
 
-const ResultItem = ({ searchResult, setBoards }) => {
+const ResultItem = ({ searchResult, boards, setBoards }) => {
   const [boardInput, setBoardInput] = useState("");
-  const [boards, setBoards] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("FORM SUBMIT");
     setBoardInput("");
     setBoards((current) => [...current, boardInput]);
   };
@@ -57,7 +55,7 @@ const ResultItem = ({ searchResult, setBoards }) => {
           </form>
           <div className="flex justify-center items-center mb-4">
             <ul>
-              {boards.map((item, index) => (
+              {boards.map((item) => (
                 <li key={nanoid()}>{item}</li>
               ))}
             </ul>

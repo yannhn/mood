@@ -1,9 +1,9 @@
 import Search from "../components/Searchbar/Search";
 
-const Index = () => {
+const Index = ({ boards, setBoards }) => {
   return (
     <>
-      <Search />
+      <Search boards={boards} setBoards={setBoards} />
     </>
   );
 };
