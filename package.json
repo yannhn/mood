@@ -1,1 +1,5 @@
-{}
+{
+  "devDependencies": {
+    "nanoid": "^4.0.2"
+  }
+}

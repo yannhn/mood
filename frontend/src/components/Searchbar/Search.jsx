@@ -50,7 +50,6 @@ const Search = () => {
         setBackgroundImageInfo(data.photos[randomElement]);
       } catch (err) {
         console.error(err.message);
-        // setBackgroundImage("");
       }
     };
     fetchData();
