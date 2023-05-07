@@ -1,4 +1,13 @@
+import { useState } from "react";
+import AddBoard from "../AddBoard/AddBoard";
+
 const SearchResults = ({ searchResults }) => {
+  const [openPopup, setOpenPopup] = useState(false);
+
+  const togglePopup = () => {
+    console.log("POPup");
+  };
+
   return (
     <div className="p-8 ">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-4 ">
@@ -20,7 +29,10 @@ const SearchResults = ({ searchResults }) => {
                 </span>
               </div>
               <div className="card-actions justify-center mb-4">
-                <button className="btn btn-sm btn-outline ">
+                <button
+                  className="btn btn-sm btn-outline"
+                  onClick={togglePopup}
+                >
                   Add to board
                 </button>
               </div>
