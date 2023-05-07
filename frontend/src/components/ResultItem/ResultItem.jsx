@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { useState } from "react";
 
-const ResultItem = ({ searchResult }) => {
+const ResultItem = ({ searchResult, setBoards }) => {
   const [boardInput, setBoardInput] = useState("");
   const [boards, setBoards] = useState([]);
 
