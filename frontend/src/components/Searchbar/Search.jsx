@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import SearchResults from "../SearchResults/SearchResults";
+import ResultContainer from "../ResultContainer/ResultContainer";
 
-const Search = () => {
+const Search = ({ boards, setBoards }) => {
   const [search, setSearch] = useState("");
   const [error, setError] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
@@ -50,7 +50,6 @@ const Search = () => {
         setBackgroundImageInfo(data.photos[randomElement]);
       } catch (err) {
         console.error(err.message);
-        // setBackgroundImage("");
       }
     };
     fetchData();
@@ -169,7 +168,11 @@ const Search = () => {
 
       {error && <div>{error}</div>}
 
-      <SearchResults searchResults={searchResults} />
+      <ResultContainer
+        searchResults={searchResults}
+        boards={boards}
+        setBoards={setBoards}
+      />
     </div>
   );
 };

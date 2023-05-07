@@ -4,37 +4,40 @@ import Index from "./routes/Index";
 import Boards from "./routes/Boards";
 import Profile from "./routes/Profile";
 import Layout from "./components/Layout/Layout";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-      <>
-        <Layout>
-          <Index />
-        </Layout>
-      </>
-    ),
-  },
-  {
-    path: "boards",
-    element: (
-      <Layout>
-        <Boards />
-      </Layout>
-    ),
-  },
-  {
-    path: "profile",
-    element: (
-      <Layout>
-        <Profile />
-      </Layout>
-    ),
-  },
-]);
+import { useState } from "react";
 
 function App() {
+  const [boards, setBoards] = useState([]);
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <>
+          <Layout>
+            <Index boards={boards} setBoards={setBoards} />
+          </Layout>
+        </>
+      ),
+    },
+    {
+      path: "boards",
+      element: (
+        <Layout>
+          <Boards boards={boards} setBoards={setBoards} />
+        </Layout>
+      ),
+    },
+    {
+      path: "profile",
+      element: (
+        <Layout>
+          <Profile />
+        </Layout>
+      ),
+    },
+  ]);
+
   return (
     <>
       <RouterProvider router={router} />
