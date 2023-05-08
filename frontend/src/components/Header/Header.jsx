@@ -12,13 +12,18 @@ const Header = () => {
             </Link>
           </li>
           <li>
+            <Link to={"/search"} className="btn btn-xs btn-outline">
+              search
+            </Link>
+          </li>
+          <li>
             <Link to={"/boards"} className="btn btn-xs btn-outline">
               Boards
             </Link>
           </li>
           <li>
             <Link to={"/profile"} className="btn btn-xs btn-outline">
-              Login/Profile
+              Login/Logout
             </Link>
           </li>
         </ul>

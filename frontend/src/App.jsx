@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import Index from "./routes/Index";
+import Search from "./routes/Search";
 import Boards from "./routes/Boards";
 import Profile from "./routes/Profile";
 import Layout from "./components/Layout/Layout";
@@ -14,8 +15,16 @@ function App() {
       path: "/",
       element: (
         <>
+          <Index />
+        </>
+      ),
+    },
+    {
+      path: "search",
+      element: (
+        <>
           <Layout>
-            <Index boards={boards} setBoards={setBoards} />
+            <Search boards={boards} setBoards={setBoards} />
           </Layout>
         </>
       ),
