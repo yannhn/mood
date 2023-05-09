@@ -7,11 +7,28 @@ const ResultItem = ({ searchResult, boards, setBoards }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setBoardInput("");
-    setBoards((current) => [...current, boardInput]);
+    // console.log("EEE", event.target.value);
+    // setBoards((current) => {...current, boardInput });
+    setBoards((current) => {
+      return { ...current, [boardInput]: ["TEST"] };
+    });
+    // setChoice(choice => { return {...choice, key:val}})
   };
 
+  // console.log("boards", boards);
+  // console.log(searchResult.id);
+
+  const getImageFromClick = (id) => {
+    console.log(id);
+  };
+  // get clicked item
+
   return (
-    <div className="card shadow-xl">
+    <div
+      className="card shadow-xl"
+      key={searchResult.id}
+      data-id={searchResult.id}
+    >
       <img src={searchResult.src.tiny} />
       <div className="card-body">
         <span>
@@ -26,11 +43,14 @@ const ResultItem = ({ searchResult, boards, setBoards }) => {
           on Pexels.
         </span>
       </div>
-
-      <label htmlFor="my-modal-6" className="btn">
+      {/* // get specific id */}
+      <label
+        htmlFor="my-modal-6"
+        className="btn"
+        onClick={() => getImageFromClick(searchResult.id)}
+      >
         Add to Board
       </label>
-
       <input type="checkbox" id="my-modal-6" className="modal-toggle" />
       <div className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
@@ -45,6 +65,7 @@ const ResultItem = ({ searchResult, boards, setBoards }) => {
                 type="text"
                 className="input input-bordered"
                 placeholder="enter board..."
+                name="name"
                 value={boardInput}
                 onChange={(event) => setBoardInput(event.target.value)}
               />
@@ -55,8 +76,18 @@ const ResultItem = ({ searchResult, boards, setBoards }) => {
           </form>
           <div className="flex justify-center items-center mb-4">
             <ul>
-              {boards.map((item) => (
-                <li key={nanoid()}>{item}</li>
+              {Object.keys(boards).map((item) => (
+                // <li key={nanoid()}>{item}</li>
+                <div key={nanoid()}>
+                  <label htmlFor="board">{item}</label>
+                  <input
+                    id="board"
+                    type="checkbox"
+                    value={item}
+                    name={item}
+                    placeholder={item}
+                  ></input>
+                </div>
               ))}
             </ul>
           </div>

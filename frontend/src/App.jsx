@@ -8,7 +8,7 @@ import Layout from "./components/Layout/Layout";
 import { useState } from "react";
 
 function App() {
-  const [boards, setBoards] = useState([]);
+  const [boards, setBoards] = useState({});
 
   const router = createBrowserRouter([
     {
