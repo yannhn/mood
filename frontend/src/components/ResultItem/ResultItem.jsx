@@ -3,25 +3,31 @@ import { useState } from "react";
 
 const ResultItem = ({ searchResult, boards, setBoards }) => {
   const [boardInput, setBoardInput] = useState("");
+  const [isChecked, setIsChecked] = useState({});
+  const [boardImage, setBoardImage] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setBoardInput("");
-    // console.log("EEE", event.target.value);
-    // setBoards((current) => {...current, boardInput });
-    setBoards((current) => {
-      return { ...current, [boardInput]: ["TEST"] };
-    });
-    // setChoice(choice => { return {...choice, key:val}})
-  };
 
-  // console.log("boards", boards);
-  // console.log(searchResult.id);
+    setBoards((current) => {
+      return { ...current, [boardInput]: [] };
+    });
+    setBoardInput("");
+  };
 
   const getImageFromClick = (id) => {
     console.log(id);
+    return id;
   };
-  // get clicked item
+
+  const handleCheckboxChange = (board, imageId) => (event) => {
+    // console.log("BRRR", board);
+    const newChange = getImageFromClick(imageId);
+    console.log("NEW:", newChange);
+
+    // checkbox sollte gecheckt werden
+    // dann muss ich für die gecheckte box das entsprechende Objekt in das item pushen
+  };
 
   return (
     <div
@@ -43,16 +49,25 @@ const ResultItem = ({ searchResult, boards, setBoards }) => {
           on Pexels.
         </span>
       </div>
-      {/* // get specific id */}
+
       <label
-        htmlFor="my-modal-6"
+        // htmlFor="my-modal-6"
+        htmlFor={`my-modal-${searchResult.id}`}
         className="btn"
         onClick={() => getImageFromClick(searchResult.id)}
       >
         Add to Board
       </label>
-      <input type="checkbox" id="my-modal-6" className="modal-toggle" />
-      <div className="modal modal-bottom sm:modal-middle">
+      <input
+        type="checkbox"
+        // id="my-modal-6"
+        id={`my-modal-${searchResult.id}`}
+        className="modal-toggle"
+      />
+      <div
+        className="modal modal-bottom sm:modal-middle"
+        data-id={searchResult.id}
+      >
         <div className="modal-box">
           <h3 className="font-bold text-lg">Your boards</h3>
           <form
@@ -79,20 +94,32 @@ const ResultItem = ({ searchResult, boards, setBoards }) => {
               {Object.keys(boards).map((item) => (
                 // <li key={nanoid()}>{item}</li>
                 <div key={nanoid()}>
-                  <label htmlFor="board">{item}</label>
+                  <label
+                    // htmlFor="board"
+                    htmlFor={`${item}_${searchResult.id}`}
+                  >
+                    {item}
+                  </label>
                   <input
-                    id="board"
+                    // id={searchResult.id}
+                    id={`${item}_${searchResult.id}`}
                     type="checkbox"
-                    value={item}
                     name={item}
-                    placeholder={item}
+                    value={item}
+                    // checked={isChecked[item] || false}
+                    checked={isChecked[`${item}_${searchResult.id}`] || false}
+                    onChange={handleCheckboxChange(item, searchResult)}
                   ></input>
                 </div>
               ))}
             </ul>
           </div>
           <div className="modal-action">
-            <label htmlFor="my-modal-6" className="btn">
+            <label
+              // htmlFor="my-modal-6"
+              htmlFor={`my-modal-${searchResult.id}`}
+              className="btn"
+            >
               Close
             </label>
           </div>
