@@ -3,12 +3,15 @@ import { useState } from "react";
 
 const ResultItem = ({ searchResult, boards, setBoards }) => {
   const [boardInput, setBoardInput] = useState("");
-  const [isChecked, setIsChecked] = useState({});
-  const [boardImage, setBoardImage] = useState([]);
+  // const [checked, setChecked] = useState([]);
+  const [checkedState, setCheckedState] = useState(
+    new Array(Object.keys(boards).length).fill(false)
+  );
+
+  // console.log("CHECKED:", checkedState);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     setBoards((current) => {
       return { ...current, [boardInput]: [] };
     });
@@ -16,18 +19,56 @@ const ResultItem = ({ searchResult, boards, setBoards }) => {
   };
 
   const getImageFromClick = (id) => {
-    console.log(id);
+    // console.log(id);
     return id;
   };
 
-  const handleCheckboxChange = (board, imageId) => (event) => {
-    // console.log("BRRR", board);
+  function handleCheckboxChange(board, imageId, event, position) {
     const newChange = getImageFromClick(imageId);
-    console.log("NEW:", newChange);
 
-    // checkbox sollte gecheckt werden
-    // dann muss ich für die gecheckte box das entsprechende Objekt in das item pushen
-  };
+    const updatedCheckedState = checkedState.map((item, index) => {
+      if (index === position) {
+        return !item;
+      } else {
+        return item;
+      }
+    });
+
+    setCheckedState(updatedCheckedState);
+
+    console.log("TEST:", event.target.value, event.target.checked);
+    console.log(checkedState);
+    // if (event.target.checked) {
+    //   setChecked([...checked, imageId]);
+    // } else {
+    //   setChecked(checked.filter((item) => item !== imageId));
+    // }
+
+    // if (event.target.checked) {
+    //   setChecked([...checked, imageId]);
+    // } else {
+    //   setChecked(checked.filter((item) => item !== imageId));
+    // }
+
+    // if (event.target.checked) {
+    //   setChecked([...checked, event.target.value]);
+    // } else {
+    //   setChecked(checked.filter((item) => item !== event.target.value));
+    // }
+
+    setBoards((current) => {
+      const updatedBoards = { ...current };
+      const imageArray = updatedBoards[board];
+
+      if (!imageArray.includes(newChange)) {
+        imageArray.push(newChange);
+      }
+
+      return updatedBoards;
+    });
+  }
+
+  // console.log("BOARDS:", boards);
 
   return (
     <div
@@ -49,9 +90,7 @@ const ResultItem = ({ searchResult, boards, setBoards }) => {
           on Pexels.
         </span>
       </div>
-
       <label
-        // htmlFor="my-modal-6"
         htmlFor={`my-modal-${searchResult.id}`}
         className="btn"
         onClick={() => getImageFromClick(searchResult.id)}
@@ -60,7 +99,6 @@ const ResultItem = ({ searchResult, boards, setBoards }) => {
       </label>
       <input
         type="checkbox"
-        // id="my-modal-6"
         id={`my-modal-${searchResult.id}`}
         className="modal-toggle"
       />
@@ -91,35 +129,25 @@ const ResultItem = ({ searchResult, boards, setBoards }) => {
           </form>
           <div className="flex justify-center items-center mb-4">
             <ul>
-              {Object.keys(boards).map((item) => (
-                // <li key={nanoid()}>{item}</li>
+              {Object.keys(boards).map((item, index) => (
                 <div key={nanoid()}>
-                  <label
-                    // htmlFor="board"
-                    htmlFor={`${item}_${searchResult.id}`}
-                  >
-                    {item}
-                  </label>
+                  <label htmlFor={`${item}_${searchResult.id}`}>{item}</label>
                   <input
-                    // id={searchResult.id}
                     id={`${item}_${searchResult.id}`}
                     type="checkbox"
                     name={item}
                     value={item}
-                    // checked={isChecked[item] || false}
-                    checked={isChecked[`${item}_${searchResult.id}`] || false}
-                    onChange={handleCheckboxChange(item, searchResult)}
+                    checked={checkedState[index]}
+                    onChange={(event) =>
+                      handleCheckboxChange(item, searchResult, event, index)
+                    }
                   ></input>
                 </div>
               ))}
             </ul>
           </div>
           <div className="modal-action">
-            <label
-              // htmlFor="my-modal-6"
-              htmlFor={`my-modal-${searchResult.id}`}
-              className="btn"
-            >
+            <label htmlFor={`my-modal-${searchResult.id}`} className="btn">
               Close
             </label>
           </div>
